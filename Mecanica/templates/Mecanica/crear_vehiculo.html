@@ -32,6 +32,7 @@
 
         <label for="cliente">Cliente</label>
         <select id="cliente" name="cliente" required>
+            <a href="{% url 'crear_cliente' %}">+ Nuevo cliente</a>
             <option value="">Selecciona un cliente</option>
             {% for c in clientes %}
                 <option value="{{ c.id }}">{{ c.nombres }} {{ c.apellidos }}</option>
