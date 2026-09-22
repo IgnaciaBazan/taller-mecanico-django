@@ -1,0 +1,19 @@
+{% extends "Mecanica/base.html" %}
+
+{% block title %}Inicio — Taller Mecánico{% endblock %}
+
+{% block contenido %}
+    <h1>Bienvenido al sistema del Taller Mecánico</h1>
+    <p>Usa el menú para gestionar vehículos y órdenes de trabajo.</p>
+
+    <div class="tarjetas">
+        <a href="{% url 'listar_vehiculos' %}" class="tarjeta">
+            <h2>Vehículos</h2>
+            <p>Consulta y administra los vehículos registrados por los clientes.</p>
+        </a>
+        <a href="{% url 'listar_ordenes' %}" class="tarjeta">
+            <h2>Órdenes de trabajo</h2>
+            <p>Revisa el estado de las órdenes abiertas y su historial.</p>
+        </a>
+    </div>
+{% endblock %}
