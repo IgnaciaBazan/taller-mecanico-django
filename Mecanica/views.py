@@ -2,6 +2,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import Vehiculo, Cliente, Marca, OrdenTrabajo, Servicio
+from django.db import IntegrityError
 # Create your views here.
 
 
@@ -18,15 +19,25 @@ def listar_vehiculos(request):
 @login_required
 def crear_vehiculo(request):
     if request.method == "POST":
-        Vehiculo.objects.create(
-            patente=request.POST.get("patente"),
-            marca_id=request.POST.get("marca"),
-            modelo=request.POST.get("modelo"),
-            anio=request.POST.get("anio"),
-            kilometraje=request.POST.get("kilometraje"),
-            cliente_id=request.POST.get("cliente")
-        )
-        return redirect("listar_vehiculos")
+        try:
+            Vehiculo.objects.create(
+                patente=request.POST.get("patente"),
+                marca_id=request.POST.get("marca"),
+                modelo=request.POST.get("modelo"),
+                anio=request.POST.get("anio"),
+                kilometraje=request.POST.get("kilometraje"),
+                cliente_id=request.POST.get("cliente")
+            )
+            return redirect("listar_vehiculos")
+        except IntegrityError:
+            error_message = "La patente ya existe. Por favor, ingrese una patente única."
+            clientes = Cliente.objects.all()
+            marcas = Marca.objects.all()
+            return render(request, "Mecanica/crear_vehiculo.html", {
+                "clientes": Cliente.objects.all(),
+                "marcas": Marca.objects.all(),
+                "error": error_message,
+            })
 
     clientes = Cliente.objects.all()
     marcas = Marca.objects.all()

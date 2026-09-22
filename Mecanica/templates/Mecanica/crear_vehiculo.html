@@ -1,6 +1,9 @@
 {% extends "Mecanica/base.html" %}
 {% block contenido %}
     <h1>Registrar vehículo</h1>
+    {% if error %}
+        <p class="error-campo">{{ error }}</p>
+    {% endif %}
     <form method="POST" id="form-vehiculo" novalidate>
         {% csrf_token %}
         <label for="patente">Patente</label>
