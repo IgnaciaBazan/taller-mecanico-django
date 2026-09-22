@@ -1,0 +1,39 @@
+{% extends "Mecanica/base.html" %}
+{% block contenido %}
+<form method="GET" action="{% url 'listar_ordenes' %}">
+    <select name="cliente" onchange="this.form.submit()">
+        <option value="">Todos los clientes</option>
+        {% for c in clientes %}
+            <option value="{{ c.id }}" {% if cliente_seleccionado == c.id|stringformat:"s" %}selected{% endif %}>
+                {{ c.nombres }} {{ c.apellidos }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
+{% if ordenes %}
+    <table>
+        <thead>
+            <tr><th>ID</th><th>Cliente</th><th>Vehículo</th><th>Fecha</th><th>Estado</th><th></th></tr>
+        </thead>
+        <tbody>
+            {% for o in ordenes %}
+            <tr>
+                <td>{{ o.id }}</td>
+                <td>{{ o.vehiculo.cliente }}</td>
+                <td>{{ o.vehiculo }}</td>
+                <td>{{ o.fecha_ingreso }}</td>
+                <td>{{ o.get_estado_display }}</td>
+                <td>
+                    <a href="{% url 'editar_orden' o.id %}">Editar</a>
+                    <a href="{% url 'eliminar_orden' o.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No hay órdenes registradas para el cliente seleccionado.</p>
+{% endif %}
+
+{% endblock %}

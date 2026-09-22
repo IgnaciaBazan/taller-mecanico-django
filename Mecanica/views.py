@@ -61,8 +61,19 @@ def editar_vehiculo(request, patente):
 
 @login_required
 def listar_ordenes(request):
-    ordenes = OrdenTrabajo.objects.all()
-    return render(request, "Mecanica/listar_ordenes.html", {"ordenes": ordenes})
+    ordenes = OrdenTrabajo.objects.select_related("vehiculo", "vehiculo__cliente").all()
+
+    cliente_id = request.GET.get("cliente")
+    if cliente_id:
+        ordenes = ordenes.filter(vehiculo__cliente_id=cliente_id)
+
+    contexto = {
+        "ordenes": ordenes,
+        "clientes": Cliente.objects.all(),
+        "cliente_seleccionado": cliente_id,
+    }
+    return render(request, "Mecanica/listar_ordenes.html", contexto)
+
 
 @login_required
 def eliminar_orden(request, id):
