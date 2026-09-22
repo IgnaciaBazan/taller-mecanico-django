@@ -151,3 +151,6 @@ def editar_orden(request, id):
     vehiculos = Vehiculo.objects.all()
     servicios = Servicio.objects.all()
     return render(request, "Mecanica/editar_orden.html", {"orden": orden, "vehiculos": vehiculos, "servicios": servicios, "estados": OrdenTrabajo.ESTADO_CHOICES})
+
+
+
