@@ -83,3 +83,48 @@
         }
     });
 })();
+
+(function () {
+    const formulario = document.getElementById("form-orden");
+    if (!formulario) return;
+
+    formulario.addEventListener("submit", function (evento) {
+        let esValido = true;
+
+        // Validación: vehículo obligatorio (selección en un desplegable)
+        const vehiculo = document.getElementById("vehiculo").value;
+        if (vehiculo === "") {
+            document.getElementById("error-vehiculo").textContent = "Debes seleccionar un vehículo.";
+            esValido = false;
+        } else {
+            document.getElementById("error-vehiculo").textContent = "";
+        }
+
+        // Validación: kilometraje obligatorio y no negativo (rango numérico)
+        const kilometraje = document.getElementById("kilometraje").value;
+        if (kilometraje === "" || isNaN(kilometraje) || kilometraje < 0) {
+            document.getElementById("error-kilometraje").textContent = "El kilometraje debe ser un número positivo.";
+            esValido = false;
+        } else {
+            document.getElementById("error-kilometraje").textContent = "";
+        }
+
+        // Validación: fecha no anterior a hoy (solo si el usuario ingresó algo, el campo es opcional)
+        const fechaEntrega = document.getElementById("fecha_entrega_estimada").value;
+        if (fechaEntrega !== "") {
+            const hoy = new Date().toISOString().split("T")[0];
+            if (fechaEntrega < hoy) {
+                document.getElementById("error-fecha_entrega_estimada").textContent = "La fecha no puede ser anterior a hoy.";
+                esValido = false;
+            } else {
+                document.getElementById("error-fecha_entrega_estimada").textContent = "";
+            }
+        } else {
+            document.getElementById("error-fecha_entrega_estimada").textContent = "";
+        }
+
+        if (!esValido) {
+            evento.preventDefault();
+        }
+    });
+})();
