@@ -1,0 +1,30 @@
+{% extends "Mecanica/base.html" %}
+{% block contenido %}
+    <h1>Vehículos registrados</h1>
+    <a href="{% url 'crear_vehiculo' %}">+ Registrar vehículo</a>
+
+    {% if vehiculos %}
+        <table>
+            <thead>
+                <tr><th>Patente</th><th>Modelo</th><th>Marca</th><th>Cliente</th><th>Km</th><th></th></tr>
+            </thead>
+            <tbody>
+                {% for v in vehiculos %}
+                <tr>
+                    <td>{{ v.patente }}</td>
+                    <td>{{ v.modelo }}</td>
+                    <td>{{ v.marca }}</td>
+                    <td>{{ v.cliente }}</td>
+                    <td>{{ v.kilometraje }}</td>
+                    <td>
+                        <a href="{% url 'editar_vehiculo' v.patente %}">Editar</a>
+                        <a href="{% url 'eliminar_vehiculo' v.patente %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Todavía no hay vehículos registrados. <a href="{% url 'crear_vehiculo' %}">Registra el primero</a>.</p>
+    {% endif %}
+{% endblock %}

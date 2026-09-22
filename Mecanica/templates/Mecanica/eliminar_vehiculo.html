@@ -1,0 +1,11 @@
+{%extends 'Mecanica/base.html' %}
+
+{% block contenido  %}
+    <h1>Eliminar Vehículo</h1>
+    <p>¿Está seguro de que desea eliminar el vehículo <strong>{{ vehiculo.patente }} - {{ vehiculo.modelo }}</strong>?  </p>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <button type="submit" class="boton-eliminar">Eliminar</button>
+        <a href="{% url 'listar_vehiculos' %}" class="boton-cancelar">Cancelar</a>
+    </form>
+{% endblock %}

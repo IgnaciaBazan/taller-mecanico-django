@@ -79,7 +79,7 @@ def crear_orden(request):
         orden = OrdenTrabajo.objects.create(
             vehiculo_id=request.POST.get("vehiculo"),
             kilometraje_ingreso=request.POST.get("kilometraje"),
-            fecha_entrega_estimada=request.POST.get("fecha_entregan") or None,
+            fecha_entrega_estimada=request.POST.get("fecha_entrega_estimada") or None,
             observaciones=request.POST.get("observaciones", ""),
 
         )
@@ -99,7 +99,7 @@ def editar_orden(request, id):
     if request.method == "POST":
         orden.vehiculo_id = request.POST.get("vehiculo")
         orden.kilometraje_ingreso = request.POST.get("kilometraje")
-        orden.fecha_entrega_estimada = request.POST.get("fecha_entregan") or None
+        orden.fecha_entrega_estimada = request.POST.get("fecha_entrega_estimada") or None
         orden.observaciones = request.POST.get("observaciones", "")
         servicios_ids = request.POST.getlist("servicios")
         orden.servicios.set(servicios_ids)
