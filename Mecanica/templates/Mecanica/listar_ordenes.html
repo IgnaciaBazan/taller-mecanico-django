@@ -1,6 +1,7 @@
 {% extends "Mecanica/base.html" %}
 {% block contenido %}
 <form method="GET" action="{% url 'listar_ordenes' %}">
+    <a href="{% url 'crear_orden' %}">+ Nueva orden</a>
     <select name="cliente" onchange="this.form.submit()">
         <option value="">Todos los clientes</option>
         {% for c in clientes %}
