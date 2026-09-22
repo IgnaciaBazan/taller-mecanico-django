@@ -22,6 +22,15 @@
         <input type="number" id="kilometraje" name="kilometraje" value="{{ orden.kilometraje_ingreso }}" required>
         <span class="error-campo" id="error-kilometraje"></span>
 
+        <label for="estado">Estado</label>
+        <select id="estado" name="estado" required>
+            {% for valor, etiqueta in estados %}
+                <option value="{{ valor }}" {% if orden.estado == valor %}selected{% endif %}>
+                    {{ etiqueta }}
+                </option>
+             {% endfor %}
+        </select>
+
         <label for="observaciones">Observaciones</label>
         <textarea name="observaciones" id="observaciones">{{ orden.observaciones }}</textarea>
 

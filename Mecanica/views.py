@@ -82,6 +82,7 @@ def listar_ordenes(request):
         "ordenes": ordenes,
         "clientes": Cliente.objects.all(),
         "cliente_seleccionado": cliente_id,
+
     }
     return render(request, "Mecanica/listar_ordenes.html", contexto)
 
@@ -123,6 +124,7 @@ def editar_orden(request, id):
         orden.kilometraje_ingreso = request.POST.get("kilometraje")
         orden.fecha_entrega_estimada = request.POST.get("fecha_entrega_estimada") or None
         orden.observaciones = request.POST.get("observaciones", "")
+        orden.estado = request.POST.get("estado")
         servicios_ids = request.POST.getlist("servicios")
         orden.servicios.set(servicios_ids)
         orden.save()
@@ -130,4 +132,4 @@ def editar_orden(request, id):
 
     vehiculos = Vehiculo.objects.all()
     servicios = Servicio.objects.all()
-    return render(request, "Mecanica/editar_orden.html", {"orden": orden, "vehiculos": vehiculos, "servicios": servicios})
+    return render(request, "Mecanica/editar_orden.html", {"orden": orden, "vehiculos": vehiculos, "servicios": servicios, "estados": OrdenTrabajo.ESTADO_CHOICES})
