@@ -49,6 +49,15 @@
             limpiarError("marca");
         }
 
+        // Validación 5: largo mínimo
+        const modelo = document.getElementById("modelo").value.trim();
+        if (modelo.length < 2) {
+            mostrarError("modelo", "El modelo debe tener al menos 2 caracteres.");
+            esValido = false;
+        } else {
+            limpiarError("modelo");
+        }
+
         if (!esValido) {
             evento.preventDefault();   // esto es lo que bloquea el envío
         }
