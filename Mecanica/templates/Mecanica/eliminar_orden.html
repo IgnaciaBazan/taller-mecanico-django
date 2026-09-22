@@ -1,0 +1,10 @@
+{% extends "Mecanica/base.html" %}
+{% block contenido %}
+    <h1>Eliminar orden de trabajo</h1>
+    <p>¿Está seguro de que desea eliminar la orden de trabajo con ID <strong>{{ orden.id }}</strong>?</p>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <button type="submit" class="boton-eliminar">Eliminar</button>
+        <a href="{% url 'listar_ordenes' %}" class="boton-cancelar">Cancelar</a>
+    </form>
+{% endblock %}
