@@ -1,0 +1,31 @@
+{% extends "Mecanica/base.html" %}
+
+{% block title %}Crear Cliente{% endblock %}
+
+{% block contenido %}
+    <h2>Crear Cliente</h2>
+    {% if error %}
+        <p class="error-campo">{{ error }}</p>
+    {% endif %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <label for="rut">RUT</label>
+        <input type="text" id="rut" name="rut" required>
+        <span class="error-campo" id="error-rut"></span>
+
+        <label for="nombres">Nombre</label>
+        <input type="text" id="nombres" name="nombres" required>
+
+        <label for="apellidos">Apellidos</label>
+        <input type="text" id="apellidos" name="apellidos" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" required>
+
+        <button type="submit">Crear Cliente</button>
+    </form>
+{% endblock %}

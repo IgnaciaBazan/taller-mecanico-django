@@ -66,8 +66,26 @@ def editar_vehiculo(request, patente):
 
     clientes = Cliente.objects.all()
     marcas = Marca.objects.all()
-    return render(request, "Mecanica/editar_vehiculo.html", {"vehiculo": vehiculo, "clientes": clientes, "marcas": marcas})     
-    
+    return render(request, "Mecanica/editar_vehiculo.html", {"vehiculo": vehiculo, "clientes": clientes, "marcas": marcas})
+
+
+@login_required
+def crear_cliente(request):
+    if request.method == "POST":
+        try:
+            Cliente.objects.create(
+                rut=request.POST.get("rut"),
+                nombres=request.POST.get("nombres"),
+                apellidos=request.POST.get("apellidos"),
+                telefono=request.POST.get("telefono"),
+                email=request.POST.get("email", ""),
+            )
+            return redirect("crear_vehiculo")
+        except IntegrityError:
+            error_message = "Ya existe un cliente registrado con ese RUT."
+            return render(request, "Mecanica/crear_cliente.html", {"error": error_message})
+
+    return render(request, "Mecanica/crear_cliente.html")
 
 
 @login_required
