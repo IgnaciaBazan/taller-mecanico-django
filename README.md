@@ -130,8 +130,8 @@ Luego abre `http://127.0.0.1:8000/`. Sin sesión iniciada, se redirige automáti
 
 | Usuario | Contraseña | Rol |
 |---|---|---|
-| `admin` | *(definida al crear el superusuario)* | Superusuario, accede también a `/admin/` |
-| `usuario_taller` | *(pendiente de crear)* | Usuario común, sin acceso al panel de administración |
+| administrador | admin123 | Superusuario, accede también a `/admin/` |
+| `mecanico1` | *mecanico1* | Usuario común, sin acceso al panel de administración |
 
 > Completar esta tabla con las credenciales reales antes de la entrega. Crear el usuario común con
 > `python manage.py createsuperuser` (para el admin) y `python manage.py shell` o el panel

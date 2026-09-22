@@ -8,12 +8,14 @@
         {% csrf_token %}
         <label for="patente">Patente</label>
         <input type="text" id="patente" name="patente" required>
+        <span class="error-campo" id="error-patente"></span>
 
         <label for="modelo">Modelo</label>
         <input type="text" id="modelo" name="modelo" required>
 
         <label for="anio">Año</label>
         <input type="number" id="anio" name="anio" required>
+        <span class="error-campo" id="error-anio"></span>
 
         <label for="kilometraje">Kilometraje</label>
         <input type="number" id="kilometraje" name="kilometraje" required>
@@ -25,6 +27,7 @@
                 <option value="{{ m.id }}">{{ m.nombre }}</option>
             {% endfor %}
         </select>
+        <span class="error-campo" id="error-marca"></span>
 
         <label for="cliente">Cliente</label>
         <select id="cliente" name="cliente" required>
@@ -33,7 +36,7 @@
                 <option value="{{ c.id }}">{{ c.nombres }} {{ c.apellidos }}</option>
             {% endfor %}
         </select>
-
+        <span class="error-campo" id="error-cliente"></span>
         <button type="submit">Guardar</button>
     </form>
 {% endblock %}

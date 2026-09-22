@@ -172,3 +172,9 @@ button:hover, .boton:hover {
     background-color: #fbeceb;
     color: var(--color-error);
 }
+
+.error-mensaje {
+    color: #c0392b;
+    font-size: 0.85em;
+    display: block;
+}
