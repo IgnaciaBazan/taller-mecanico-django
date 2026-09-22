@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Taller Mecánico{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'Mecanica/css/estilos.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'inicio' %}">Taller Mecánico</a>
+        <a href="{% url 'listar_vehiculos' %}">Vehículos</a>
+        <a href="{% url 'listar_ordenes' %}">Órdenes de trabajo</a>
+
+        {% if user.is_authenticated %}
+            <span>Conectado como {{ user.username }}</span>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% block contenido %}
+        {% endblock %}
+    </main>
+</body>
+</html>
