@@ -31,8 +31,8 @@
         <span class="error-campo" id="error-marca"></span>
 
         <label for="cliente">Cliente</label>
+        <a href="{% url 'crear_cliente' %}">+ Nuevo cliente</a>
         <select id="cliente" name="cliente" required>
-            <a href="{% url 'crear_cliente' %}">+ Nuevo cliente</a>
             <option value="">Selecciona un cliente</option>
             {% for c in clientes %}
                 <option value="{{ c.id }}">{{ c.nombres }} {{ c.apellidos }}</option>
