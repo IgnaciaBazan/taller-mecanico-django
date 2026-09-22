@@ -17,7 +17,10 @@
 
         {% if user.is_authenticated %}
             <span>Conectado como {{ user.username }}</span>
-            <a href="{% url 'logout' %}">Cerrar sesión</a>
+            <form method="post" action="{% url 'logout' %}" class="form-logout">
+                {% csrf_token %}
+                <button type="submit" class="link-logout">Cerrar sesión</button>
+            </form>
         {% endif %}
     </nav>
 
