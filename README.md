@@ -137,13 +137,30 @@ Luego abre `http://127.0.0.1:8000/`. Sin sesión iniciada, se redirige automáti
 > `python manage.py createsuperuser` (para el admin) y `python manage.py shell` o el panel
 > `/admin/` (para el usuario común, sin marcar "staff").
 
+## Diagrama del modelo de datos
+
+![Diagrama del modelo de datos](docs/diagrama-modelo.svg)
+
+Entidades, atributos y cardinalidades de las relaciones (1:N entre `Marca`/`Cliente` y `Vehiculo`,
+1:N entre `Vehiculo` y `OrdenTrabajo`, N:M entre `OrdenTrabajo` y `Servicio`).
+
 ## Datos de prueba
 
-La base de datos entregada debe incluir al menos 15 registros reales repartidos entre las
-entidades (clientes, vehículos, marcas, servicios y órdenes de trabajo), cargados desde el panel
-de administración. El respaldo se entrega como `taller_mecanico.sql`.
+La base de datos incluye 24 registros reales repartidos entre las 5 entidades (marcas, clientes,
+vehículos, servicios y órdenes de trabajo), cargados desde el panel de administración. El respaldo
+completo se entrega en `respaldo.sql`, generado con `pg_dump`:
+
+```powershell
+& "C:\Program Files\PostgreSQL\18\bin\pg_dump.exe" -U <tu_usuario> -d <tu_base> -f respaldo.sql --no-owner --no-privileges
+```
+
+Para restaurarlo en una base de datos nueva y vacía:
+
+```powershell
+& "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U <tu_usuario> -d <tu_base> -f respaldo.sql
+```
 
 ## Estado del proyecto
 
-En desarrollo — ver las guías internas del equipo para el detalle de cada etapa (modelo,
-autenticación, arquitectura MVT, templates, CRUD, validación JavaScript).
+Funcional de principio a fin: modelo de datos, autenticación, arquitectura MVT, CRUD completo con
+validación JavaScript, panel de administración y datos de prueba cargados.

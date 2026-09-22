@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" font-family="Segoe UI, Arial, sans-serif">
+  <style>
+    .entidad-titulo { fill: #ffffff; font-size: 16px; font-weight: 700; }
+    .attr { font-size: 13px; fill: #22292f; }
+    .attr-pk { font-size: 13px; fill: #1f3a5f; font-weight: 700; }
+    .attr-fk { font-size: 13px; fill: #6a4a00; font-style: italic; }
+    .caja { fill: #ffffff; stroke: #1f3a5f; stroke-width: 1.5; }
+    .header { fill: #1f3a5f; }
+    .linea { stroke: #55606b; stroke-width: 1.5; fill: none; }
+    .cardinalidad { font-size: 13px; fill: #b3261e; font-weight: 700; }
+    .titulo-diagrama { font-size: 20px; font-weight: 700; fill: #1f3a5f; }
+  </style>
+
+  <rect width="960" height="700" fill="#f4f6f8"/>
+  <text x="480" y="30" text-anchor="middle" class="titulo-diagrama">Modelo de datos — Taller Mecánico</text>
+
+  <!-- Marca -->
+  <g>
+    <rect x="30" y="70" width="190" height="90" rx="6" class="caja"/>
+    <rect x="30" y="70" width="190" height="30" rx="6" class="header"/>
+    <rect x="30" y="90" width="190" height="10" class="header"/>
+    <text x="125" y="90" text-anchor="middle" class="entidad-titulo">Marca</text>
+    <text x="42" y="118" class="attr-pk">id (PK)</text>
+    <text x="42" y="138" class="attr">nombre</text>
+  </g>
+
+  <!-- Cliente -->
+  <g>
+    <rect x="740" y="70" width="200" height="150" rx="6" class="caja"/>
+    <rect x="740" y="70" width="200" height="30" rx="6" class="header"/>
+    <rect x="740" y="90" width="200" height="10" class="header"/>
+    <text x="840" y="90" text-anchor="middle" class="entidad-titulo">Cliente</text>
+    <text x="752" y="118" class="attr-pk">id (PK)</text>
+    <text x="752" y="138" class="attr">rut</text>
+    <text x="752" y="158" class="attr">nombres</text>
+    <text x="752" y="178" class="attr">apellidos</text>
+    <text x="752" y="198" class="attr">telefono, email</text>
+  </g>
+
+  <!-- Vehiculo -->
+  <g>
+    <rect x="330" y="250" width="240" height="170" rx="6" class="caja"/>
+    <rect x="330" y="250" width="240" height="30" rx="6" class="header"/>
+    <rect x="330" y="270" width="240" height="10" class="header"/>
+    <text x="450" y="270" text-anchor="middle" class="entidad-titulo">Vehiculo</text>
+    <text x="342" y="298" class="attr-pk">patente (PK)</text>
+    <text x="342" y="318" class="attr-fk">marca_id (FK → Marca)</text>
+    <text x="342" y="338" class="attr-fk">cliente_id (FK → Cliente)</text>
+    <text x="342" y="358" class="attr">modelo</text>
+    <text x="342" y="378" class="attr">anio</text>
+    <text x="342" y="398" class="attr">kilometraje</text>
+  </g>
+
+  <!-- OrdenTrabajo -->
+  <g>
+    <rect x="300" y="480" width="270" height="190" rx="6" class="caja"/>
+    <rect x="300" y="480" width="270" height="30" rx="6" class="header"/>
+    <rect x="300" y="500" width="270" height="10" class="header"/>
+    <text x="435" y="500" text-anchor="middle" class="entidad-titulo">OrdenTrabajo</text>
+    <text x="312" y="528" class="attr-pk">id (PK)</text>
+    <text x="312" y="548" class="attr-fk">vehiculo_id (FK → Vehiculo)</text>
+    <text x="312" y="568" class="attr">fecha_ingreso (auto)</text>
+    <text x="312" y="588" class="attr">fecha_entrega_estimada</text>
+    <text x="312" y="608" class="attr">estado</text>
+    <text x="312" y="628" class="attr">kilometraje_ingreso</text>
+    <text x="312" y="648" class="attr">observaciones</text>
+  </g>
+
+  <!-- Servicio -->
+  <g>
+    <rect x="670" y="480" width="220" height="130" rx="6" class="caja"/>
+    <rect x="670" y="480" width="220" height="30" rx="6" class="header"/>
+    <rect x="670" y="500" width="220" height="10" class="header"/>
+    <text x="780" y="500" text-anchor="middle" class="entidad-titulo">Servicio</text>
+    <text x="682" y="528" class="attr-pk">id (PK)</text>
+    <text x="682" y="548" class="attr">nombre</text>
+    <text x="682" y="568" class="attr">descripcion</text>
+    <text x="682" y="588" class="attr">precio</text>
+  </g>
+
+  <!-- Linea Marca -> Vehiculo -->
+  <path d="M 125 160 L 125 210 L 410 210 L 410 250" class="linea"/>
+  <text x="135" y="205" class="cardinalidad">1</text>
+  <text x="395" y="245" class="cardinalidad">N</text>
+
+  <!-- Linea Cliente -> Vehiculo -->
+  <path d="M 840 220 L 840 235 L 500 235 L 500 250" class="linea"/>
+  <text x="825" y="232" class="cardinalidad">1</text>
+  <text x="510" y="245" class="cardinalidad">N</text>
+
+  <!-- Linea Vehiculo -> OrdenTrabajo -->
+  <path d="M 450 420 L 450 480" class="linea"/>
+  <text x="458" y="440" class="cardinalidad">1</text>
+  <text x="458" y="472" class="cardinalidad">N</text>
+
+  <!-- Linea OrdenTrabajo -> Servicio (N:M) -->
+  <path d="M 570 545 L 670 545" class="linea"/>
+  <text x="580" y="538" class="cardinalidad">N</text>
+  <text x="645" y="538" class="cardinalidad">M</text>
+
+  <!-- Leyenda -->
+  <g>
+    <rect x="30" y="620" width="16" height="16" class="header"/>
+    <text x="52" y="633" class="attr">Cabecera = nombre de la entidad</text>
+    <text x="30" y="660" class="attr-pk">PK</text>
+    <text x="55" y="660" class="attr">= clave primaria</text>
+    <text x="30" y="680" class="attr-fk">FK</text>
+    <text x="55" y="680" class="attr">= clave foránea (relación)</text>
+  </g>
+</svg>
