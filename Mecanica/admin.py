@@ -15,6 +15,7 @@ class ServicioAdmin(admin.ModelAdmin):
     list_display = ("nombre", "precio")
     search_fields = ("nombre",)
     ordering = ("nombre",)
+    list_editable = ("precio",)
 
 @admin.register(OrdenTrabajo)
 class OrdenTrabajoAdmin(admin.ModelAdmin):
